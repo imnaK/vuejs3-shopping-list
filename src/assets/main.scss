@@ -1,0 +1,13 @@
+@import './base.scss';
+
+#app {
+  max-width: 80rem; // 1280px
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+}
