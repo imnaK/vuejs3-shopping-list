@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, provide } from "vue";
-import ShoppingListCard from "./components/ShoppingListCard.vue";
+import ShoppingList from "./components/ShoppingList.vue";
 
 const selectedListId = ref(-1);
 
@@ -42,10 +42,27 @@ provide("items", tblItems);
   <header></header>
 
   <main>
-    <h1>Einkaufslisten</h1>
-    <div class="list-cards">
-      <ShoppingListCard v-for="list in tblLists" :key="list.id" :name="list.name" @click="selectedListId = list.id" />
+
+    <div v-if="selectedListId === -1">
+      <h1>Einkaufslisten</h1>
+      <div class="layout-cards">
+        <ShoppingList v-for="list in tblLists" :key="list.id" :name="list.name" @click="selectedListId = list.id" />
+      </div>
     </div>
+
+    <div v-else>
+      <div class="layout-mid">
+        <button class="btn btn-back" @click="selectedListId = -1">&#60;</button>
+        <h2>{{ tblLists[selectedListId].name }}</h2>
+      </div>
+
+      <div class="layout-cards">
+        <h1>Läden</h1>
+        <StoreList v-for="store in tblStores.filter(store => store.listId === selectedListId)" :key="store.id"
+          :name="store.name" />
+      </div>
+    </div>
+
   </main>
 </template>
 
@@ -59,10 +76,24 @@ header {
   margin: 0 auto 2rem;
 }
 
-.list-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  grid-gap: 1rem;
+.btn {
+  cursor: pointer;
+  border: none;
+  background-color: var(--vt-c-black-soft);
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  font-size: 1.5rem;
+  color: var(--vt-c-text-dark-2);
+  border-radius: 4rem;
+
+  &:hover {
+    background-color: var(--vt-c-black-mute);
+    color: var(--vt-c-text-dark-1);
+  }
+}
+
+.btn-back {
+  margin-right: 1rem;
 }
 
 @media (min-width: 1024px) {
