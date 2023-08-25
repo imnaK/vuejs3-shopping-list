@@ -6,7 +6,7 @@ const props = defineProps<{
 
 <template>
   <div class="shopping-list-card">
-    <h3>{{ name }}</h3>
+    <h3>{{ props.name }}</h3>
   </div>
 </template>
 

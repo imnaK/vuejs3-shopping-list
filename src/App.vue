@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { ref, provide } from "vue";
+import { ref, reactive, provide } from "vue";
 import ShoppingList from "./components/ShoppingList.vue";
+import StoreList from "./components/StoreList.vue";
 
 const selectedListId = ref(-1);
 
 let tblListsIdCounter = 0;
-const tblLists = ref([
+const tblLists = reactive([
   { id: tblListsIdCounter++, name: "Liste1" },
   { id: tblListsIdCounter++, name: "Coole Liste" },
   { id: tblListsIdCounter++, name: "Wieso ist hier der name so lang? Doch noch länger? Ich kann hier aber echt viel Text rein schreiben lol!" },
 ]);
 
 let tblStoresIdCounter = 0;
-const tblStores = ref([
+const tblStores = reactive([
   { id: tblStoresIdCounter++, listId: 0, name: "Edeka" },
   { id: tblStoresIdCounter++, listId: 0, name: "Rewe" },
   { id: tblStoresIdCounter++, listId: 0, name: "Penny" },
@@ -21,8 +22,9 @@ const tblStores = ref([
   { id: tblStoresIdCounter++, listId: 2, name: "Netto" },
 ]);
 
+type typeItem = { id: number, storeId: number, name: string, completed: boolean; };
 let tblItemsIdCounter = 0;
-const tblItems = ref([
+const tblItems: [typeItem] = reactive([
   { id: tblItemsIdCounter++, storeId: 0, name: "Tomaten", completed: false },
   { id: tblItemsIdCounter++, storeId: 0, name: "Gurken", completed: false },
   { id: tblItemsIdCounter++, storeId: 0, name: "Sauce Hollandaise", completed: false },
@@ -56,8 +58,8 @@ provide("items", tblItems);
         <h2>{{ tblLists[selectedListId].name }}</h2>
       </div>
 
+      <h1>Läden</h1>
       <div class="layout-cards">
-        <h1>Läden</h1>
         <StoreList v-for="store in tblStores.filter(store => store.listId === selectedListId)" :key="store.id"
           :name="store.name" />
       </div>
