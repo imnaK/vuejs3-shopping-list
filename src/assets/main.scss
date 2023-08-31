@@ -12,14 +12,48 @@ a {
   text-decoration: none;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  line-height: normal;
+}
+
 .layout-mid {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .layout-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   grid-gap: 1rem;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  background-color: var(--vt-c-black-soft);
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  font-size: 1.5rem;
+  color: var(--vt-c-text-dark-2);
+  border-radius: 4rem;
+
+  &:hover {
+    background-color: var(--vt-c-black-mute);
+    color: var(--vt-c-text-dark-1);
+  }
+}
+
+.mr-1 {
+  margin-right: 1rem;
+}
+
+.ml-1 {
+  margin-left: 1rem;
 }

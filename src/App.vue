@@ -24,13 +24,20 @@ const tblStores = reactive([
 
 type typeItem = { id: number, storeId: number, name: string, completed: boolean; };
 let tblItemsIdCounter = 0;
-const tblItems: [typeItem] = reactive([
+const tblItems: typeItem[] = reactive([
   { id: tblItemsIdCounter++, storeId: 0, name: "Tomaten", completed: false },
-  { id: tblItemsIdCounter++, storeId: 0, name: "Gurken", completed: false },
-  { id: tblItemsIdCounter++, storeId: 0, name: "Sauce Hollandaise", completed: false },
-  { id: tblItemsIdCounter++, storeId: 0, name: "Schinken", completed: false },
-  { id: tblItemsIdCounter++, storeId: 1, name: "Brot", completed: false },
-  { id: tblItemsIdCounter++, storeId: 1, name: "Baguette de Baguette", completed: false },
+  { id: tblItemsIdCounter++, storeId: 1, name: "Gurken", completed: true },
+  { id: tblItemsIdCounter++, storeId: 2, name: "Sauce Hollandaise", completed: false },
+  { id: tblItemsIdCounter++, storeId: 3, name: "Schinken", completed: true },
+  { id: tblItemsIdCounter++, storeId: 3, name: "Brot", completed: true },
+  { id: tblItemsIdCounter++, storeId: 4, name: "Brötchen", completed: false },
+  { id: tblItemsIdCounter++, storeId: 5, name: "Hackfleisch", completed: false },
+  { id: tblItemsIdCounter++, storeId: 4, name: "Salami", completed: false },
+  { id: tblItemsIdCounter++, storeId: 5, name: "Pizzateig", completed: true },
+  { id: tblItemsIdCounter++, storeId: 2, name: "Mehl", completed: true },
+  { id: tblItemsIdCounter++, storeId: 1, name: "Zucker", completed: false },
+  { id: tblItemsIdCounter++, storeId: 1, name: "Salz", completed: true },
+  { id: tblItemsIdCounter++, storeId: 1, name: "Baguette de Baguette del Parmesane", completed: false },
 ]);
 
 provide("selectedListId", selectedListId);
@@ -54,14 +61,14 @@ provide("items", tblItems);
 
     <div v-else>
       <div class="layout-mid">
-        <button class="btn btn-back" @click="selectedListId = -1">&#60;</button>
+        <button class="btn mr-1" @click="selectedListId = -1">&#60;</button>
         <h2>{{ tblLists[selectedListId].name }}</h2>
       </div>
 
       <h1>Läden</h1>
       <div class="layout-cards">
         <StoreList v-for="store in tblStores.filter(store => store.listId === selectedListId)" :key="store.id"
-          :name="store.name" />
+          :name="store.name" :storeId="store.id" />
       </div>
     </div>
 
@@ -76,26 +83,6 @@ header {
 .logo {
   display: block;
   margin: 0 auto 2rem;
-}
-
-.btn {
-  cursor: pointer;
-  border: none;
-  background-color: var(--vt-c-black-soft);
-  min-width: 2.5rem;
-  min-height: 2.5rem;
-  font-size: 1.5rem;
-  color: var(--vt-c-text-dark-2);
-  border-radius: 4rem;
-
-  &:hover {
-    background-color: var(--vt-c-black-mute);
-    color: var(--vt-c-text-dark-1);
-  }
-}
-
-.btn-back {
-  margin-right: 1rem;
 }
 
 @media (min-width: 1024px) {
