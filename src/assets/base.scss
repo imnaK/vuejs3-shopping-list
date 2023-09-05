@@ -1,19 +1,4 @@
-// ### Breakpoints ###
-
-$breakpoints: (
-  xsmall: 0px,
-  small: 576px,
-  medium: 768px,
-  large: 992px,
-  xlarge: 1200px,
-  xxlarge: 1400px,
-);
-
-@mixin respond-to($breakpoint) {
-  @media screen and (min-width: map-get($breakpoints, $breakpoint)) {
-    @content;
-  }
-}
+@use "./variables.scss" as *;
 
 /* color palette from <https://github.com/vuejs/theme> */
 :root {

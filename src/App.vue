@@ -22,7 +22,7 @@ const tblStores = reactive([
   { id: tblStoresIdCounter++, listId: 2, name: "Netto" },
 ]);
 
-type typeItem = { id: number, storeId: number, name: string, completed: boolean; };
+export type typeItem = { id: number, storeId: number, name: string, completed: boolean; };
 let tblItemsIdCounter = 0;
 const tblItems: typeItem[] = reactive([
   { id: tblItemsIdCounter++, storeId: 0, name: "Tomaten", completed: false },
